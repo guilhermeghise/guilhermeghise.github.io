@@ -1,0 +1,67 @@
+/* ── VARIÁVEIS DE TEMA ─────────────────────────────────────────── */
+:root {
+  --ios-bg: #000000;
+  --ios-card: #1c1c1e;
+  --ios-text: #ffffff;
+  --ios-secondary: #8e8e93;
+  --ios-blue: #0A84FF;
+  --ios-green: #30D158;
+  --ios-red: #FF453A;
+  --ios-border: rgba(255, 255, 255, 0.1);
+  --ios-hover: rgba(255, 255, 255, 0.15); /* Novo: Para botões */
+  --ios-overlay: rgba(0, 0, 0, 0.6);      /* Novo: Fundo do modal */
+}
+
+body.light-mode {
+  --ios-bg: #f2f2f7;
+  --ios-card: #ffffff;
+  --ios-text: #000000;
+  --ios-secondary: #6c6c70;
+  --ios-border: rgba(0, 0, 0, 0.1); 
+  --ios-hover: rgba(0, 0, 0, 0.05);       /* Novo: Para botões */
+  --ios-overlay: rgba(0, 0, 0, 0.2);      /* Novo: Fundo do modal */
+}
+
+/* ── RESET & BASE ─────────────────────────────────────────────── */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--ios-bg);
+  color: var(--ios-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── SCROLL CONTAINER ─────────────────────────────────────────── */
+.portfolio-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.portfolio-container::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-container > section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}

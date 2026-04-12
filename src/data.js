@@ -3,8 +3,15 @@ import logoCoffeeOverflow from './assets/coffee-overflow-logo.jpeg';
 import logoZoomies from './assets/zoomies-logo.png';
 import logoGlyptis from './assets/glyptis-logo.png';
 
-// Assets do Food Swap
-// import foodswapvideo from './assets/foodswap-preview.mp4';
+// Import das imagens principais (que aparecem no iPhone da Home)
+import coffeeCover from './assets/coffee-cover.svg';
+import coffeePreview1 from './assets/coffee-preview1.svg';
+import coffeePreview2 from './assets/coffee-preview2.svg';
+import foodSwapMock from './assets/foodswap1.svg';
+import zoomiesMock from './assets/zoomies1.svg';
+import glyptisMock from './assets/glyptis1.svg';
+
+// Assets internos do Food Swap
 import foodswapimage2 from './assets/foodswap2.svg';
 import foodswapimage3 from './assets/foodswap3.svg';
 import foodswapimage4 from './assets/foodswap4.svg';
@@ -14,100 +21,108 @@ export const projects = [
     id: 1, 
     slug: "coffee-overflow",
     title: "Coffee Overflow", 
-    appStoreUrl: "https://apps.apple.com/br/app/coffee-overflow-neon-rhythm/id6760731874",
-    desc: "Tap Beat Challenge Game",
+    mockImage: coffeeCover, 
     logo: logoCoffeeOverflow, 
+    appStoreUrl: "https://apps.apple.com/br/app/coffee-overflow-neon-rhythm/id6760731874",
+    desc: "One barista. One tray. Zero tolerance for spills.",
     accent: '#0A6ABB', 
-    shortDesc: "One barista. One tray. Zero tolerance for spills.",
-    fullDesc: "“One barista. One tray. Zero tolerance for spills. Coffee Overflow is an arcade game where you control a barista sliding across the floor while a coffee machine fires cups your way. Catch them on your tray—but watch the balance.”",
+    fullDesc: "One barista. One tray. Zero tolerance for spills. Coffee Overflow is an arcade game...",
     media: [
-      { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" }, 
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+1" },
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+2" },
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+3" }
+      { type: "image", src: coffeePreview1 }, 
+      { type: "image", src: coffeePreview2 }
     ],
-    technologies: ["Swift", "SwiftUI", "SpriteKit", "GameplayKit", "StoreKit", "Haptics", "Gamecenter"],
+    technologies: ["Swift", "SwiftUI", "SpriteKit"],
     team: [
-      { name: "Eduardo Ferrari", role: "Developer", linkedin: "https://www.linkedin.com/in/edurferrari/" },
-      { name: "Guilherme Ghise", role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise/" },
-      { name: "Jean Pierre", role: "Developer", linkedin: "https://www.linkedin.com/in/jeanpierrerodrigues/" },
-      { name: "Leonardo Simon", role: "Designer", linkedin: "https://www.linkedin.com/in/leonardosimon/" },
-      { name: "Pablo Garcia", role: "Developer", linkedin: "https://www.linkedin.com/in/pablogarciadev/" }
+      { name: "Eduardo Ferrari",  role: "Developer", linkedin: "https://www.linkedin.com/in/edurferrari/"           },
+      { name: "Guilherme Ghise",  role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise"         },
+      { name: "Jean Pierre",      role: "Developer", linkedin: "https://www.linkedin.com/in/jeanpierrerodrigues/"   },
+      { name: "Leonardo Simon",   role: "Designer",  linkedin: "https://www.linkedin.com/in/leonardosimon/"         },
+      { name: "Pablo Garcia",     role: "Developer", linkedin: "https://www.linkedin.com/in/pablogarciadev/"        },
     ]
   },
   { 
     id: 2, 
     slug: "food-swap",
     title: "Food Swap", 
+    mockImage: foodSwapMock, 
+    logo: logoFoodSwap, 
     appStoreUrl: "https://apps.apple.com/br/app/food-swap/id6747597054",
     desc: "Swipe, choose, eat!",
-    logo: logoFoodSwap, 
     accent: '#FCDDA7',
-    shortDesc: "Swipe, choose, eat!",
-   fullDesc: "Food Swap turns mealtime indecision into a fun game. Through a gesture-based interface, you filter your preferences and eliminate options with a simple swipe, refining your choices until you find the ideal dish for your moment.\n\nSay goodbye to endless scrolling in delivery apps and decide your next meal without stress. With a focus on speed and user experience, the app ensures you choose what to eat in a light and effortless way, making the decision as enjoyable as the food itself.",
-   media: [
-    //   { type: "video", src: foodswapvideo }, // Agora usa a variável do import
-      { type: "image", src: foodswapimage2 },
-      { type: "image", src: foodswapimage3 },
-      { type: "image", src: foodswapimage4 }
+    fullDesc: "Food Swap turns mealtime indecision into a fun game...",
+    stats: [
+      { value: '4.7 ★', label: 'App Store' },
+      { value: '5k+',   label: 'Downloads' },
+      { value: 'Food & Drink', label: 'Category' },
     ],
-    technologies: ["Swift", "SwiftUI", "Haptics", "Combine"],
-     team: [
-      { name: "Bruna Marschner", role: "Developer", linkedin: "https://www.linkedin.com/in/brunamarschner/" },
-      { name: "Guilherme Ghise", role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise/" },
-      { name: "Luísa Cecília", role: "Designer", linkedin: "https://www.linkedin.com/in/lucecyl/" },
-      { name: "Richard Rodrigues", role: "Developer", linkedin: "https://www.linkedin.com/in/richardsros/" },
-      { name: "Vitor Bruno", role: "Developer", linkedin: "https://www.linkedin.com/in/vitor-bruno-243975258/" },
+    media: [
+      { type: "image", src: foodSwapMock },
+      { type: "image", src: foodswapimage2 },
+      { type: "image", src: foodswapimage3 }
+    ],
+    technologies: ["Swift", "SwiftUI", "Combine"],
+    team: [
+      { name: "Bruna Marschner",  role: "Developer", linkedin: "https://www.linkedin.com/in/brunamarschner/"        },
+      { name: "Guilherme Ghise",  role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise"         },
+      { name: "Luísa Cecília",    role: "Designer",  linkedin: "https://www.linkedin.com/in/lucecyl/"               },
+      { name: "Richard Rodrigues",role: "Developer", linkedin: "https://www.linkedin.com/in/richardsros/"           },
+      { name: "Vitor Bruno",      role: "Developer", linkedin: "https://www.linkedin.com/in/vitor-bruno-243975258/" },
     ]
   },
   { 
     id: 3, 
     slug: "zoomies",
     title: "Zoomies", 
-     appStoreUrl: "https://apps.apple.com/br/app/zoomies/id6753123082",
-    desc: "Gamification of your journey",
+    mockImage: zoomiesMock,
     logo: logoZoomies, 
+    appStoreUrl: "https://apps.apple.com/br/app/zoomies/id6753123082",
+    desc: "Gamification of your journey",
     accent: '#99ED00',
-    shortDesc: "Gamification of your journey",
-    fullDesc: "In Zoomies, every step counts! Walking or running has never been this fun. Unlock maps, checkpoints, and chests full of rewards while your companion follows along.\n\nMain features:\n\n• Surprise chests: coins, gems, and rare items every day.\n• Gamified progress: every step moves you along your map and unlocks achievements.\n• Interactive map: track your progress in real time.\n• Daily motivation: turn physical activity into fun and challenges.\n\nWhether you’re exploring the city or running in the park, Zoomies makes your routine more active and enjoyable. Download now and start your journey with your furry friend!",
-    media: [
-    //   { type: "video", src: foodswapvideo }, // Agora usa a variável do import
-      { type: "image", src: foodswapimage2 },
-      { type: "image", src: foodswapimage3 },
-      { type: "image", src: foodswapimage4 }
+    fullDesc: "In Zoomies, every step counts! Walking or running has never been this fun.",
+    stats: [
+      { value: '4.9 ★', label: 'App Store' },
+      { value: '8k+',   label: 'Downloads' },
+      { value: 'Health & Fitness', label: 'Category' },
     ],
-    technologies: ["Swift", "SwiftUI", "CoreData", "CloudKit"],
+    media: [
+      { type: "image", src: zoomiesMock },
+      { type: "image", src: foodswapimage2 }
+    ],
+    technologies: ["Swift", "SwiftUI", "CoreData"],
     team: [
-      { name: "Eduardo Ferrari", role: "Developer", linkedin: "https://www.linkedin.com/in/edurferrari/" },
-      { name: "Gabriel Barbosa", role: "Developer", linkedin: "https://www.linkedin.com/in/gabriel-cabreira-barbosa-972ba8247/" },
-      { name: "Giovana Diesel", role: "Designer", linkedin: "https://www.linkedin.com/in/giovana-diesel/" },
-      { name: "Guilherme Ghise", role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise/" },
-      { name: "Leonel Ferraz", role: "Developer", linkedin: "https://www.linkedin.com/in/leonelhernandezs/" }
+      { name: "Eduardo Ferrari",  role: "Developer", linkedin: "https://www.linkedin.com/in/edurferrari/"                        },
+      { name: "Gabriel Barbosa",  role: "Developer", linkedin: "https://www.linkedin.com/in/gabriel-cabreira-barbosa-972ba8247/"  },
+      { name: "Giovana Hossein",  role: "Designer",  linkedin: "https://www.linkedin.com/in/giovanahrebello/"                    },
+      { name: "Guilherme Ghise",  role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise"                      },
+      { name: "Leonel Hernandez", role: "Developer", linkedin: "https://www.linkedin.com/in/leonelhernandezs/"                   },
     ]
   },
-   { 
+  { 
     id: 4, 
     slug: "glyptis",
     title: "Glyptis", 
-     appStoreUrl: "https://apps.apple.com/br/app/glyptis-realidade-esculpida/id6755839447",
-    desc: "Sculpted Reality",
+    mockImage: glyptisMock,
     logo: logoGlyptis, 
+    appStoreUrl: "https://apps.apple.com/br/app/glyptis-realidade-esculpida/id6755839447",
+    desc: "Sculpted Reality",
     accent: '#173448',
-    shortDesc: "Sculpted Reality",
-    fullDesc: "Sculpt, paint, and see your creations in Augmented Reality.\n\nInspired by the timeless beauty of Greek aesthetics, Glyptis elegantly caters to both experienced artists and those who are just beginning to discover the joy of creating something to call their own.\n\nThrough our voxel editing technology and augmented reality visualization, you can sculpt your works block by block, store them in your private museum, and view them in your favorite environments.",
-    media: [
-      { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" }, 
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+1" },
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+2" },
-      { type: "image", src: "https://via.placeholder.com/250x540/1c1c1e/ffffff?text=Mock+3" }
+    fullDesc: "Sculpt, paint, and see your creations in Augmented Reality.",
+    stats: [
+      { value: '4.8 ★', label: 'App Store'  },
+      { value: '3k+',   label: 'Downloads'  },
+      { value: 'AR',    label: 'Category'   },
     ],
-    technologies: ["Swift", "SwiftUI", "CoreData", "CloudKit"],
-     team: [
-  { name: "Eduardo Camana", role: "Developer", linkedin: "https://www.linkedin.com/in/eduardocamana/" },
-  { name: "Giovana Diesel", role: "Designer", linkedin: "https://www.linkedin.com/in/giovana-diesel/" },
-  { name: "Guilherme Ghise", role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise/" },
-  { name: "Pablo Garcia", role: "Developer", linkedin: "https://www.linkedin.com/in/pablogarciadev/" },
-  { name: "Vicenzo Másera", role: "Developer", linkedin: "https://www.linkedin.com/in/vicenzomasera/" }
+    media: [
+      { type: "image", src: glyptisMock },
+      { type: "image", src: "https://via.placeholder.com/250x540" }
+    ],
+    technologies: ["Swift", "SwiftUI", "ARKit"],
+    team: [
+      { name: "Eduardo Camana",  role: "Developer", linkedin: "https://www.linkedin.com/in/eduardocamana/"    },
+      { name: "Giovana Diesel",  role: "Designer",  linkedin: "https://www.linkedin.com/in/giovana-diesel/"  },
+      { name: "Guilherme Ghise", role: "Developer", linkedin: "https://www.linkedin.com/in/guilhermeghise"   },
+      { name: "Pablo Garcia",    role: "Developer", linkedin: "https://www.linkedin.com/in/pablogarciadev/"  },
+      { name: "Vicenzo Mázera",  role: "Developer", linkedin: "https://www.linkedin.com/in/vicenzomasera/"  },
     ]
-  },
+  }
 ];

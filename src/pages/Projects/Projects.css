@@ -1,0 +1,120 @@
+.projects-section {
+  padding: 120px 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Lista de projetos ── */
+.projects-text h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-item {
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  border-radius: 12px;
+  padding: 4px 0;
+}
+
+.project-item:focus-visible {
+  outline: 2px solid var(--ios-blue);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.project-item.active {
+  opacity: 1;
+  transform: translateX(10px);
+}
+
+.project-item h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.project-item p {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ── iPhone Mockup ── */
+.projects-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iphone-frame {
+  position: relative;
+  height: 600px;
+  aspect-ratio: 9 / 19.5;
+  background: #000;
+  border-radius: 50px;
+  padding: 12px;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 25px;
+  background: #000;
+  border-radius: 15px;
+  z-index: 2;
+}
+
+.iphone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #111;
+}
+
+.iphone-app {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-section {
+    padding: 80px 24px;
+  }
+
+  .iphone-frame {
+    height: 480px;
+  }
+}

@@ -1,0 +1,90 @@
+.cv-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cv-modal-content {
+  background: #1c1c1e;
+  width: 100%;
+  max-width: 900px;
+  height: 85vh;
+  border-radius: 24px;
+  border: 1px solid var(--ios-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cv-modal-header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.cv-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #8e8e93;
+}
+
+.cv-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cv-action-btn {
+   background: var(--ios-card);
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.cv-action-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cv-action-btn.download-btn {
+  background: #0A84FF;
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+
+.cv-action-btn.download-btn:hover {
+  background: #0071e3;
+}
+
+.cv-viewer-container {
+  flex: 1;
+  background: #323232;
+  overflow: hidden;
+}
+
+.cv-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

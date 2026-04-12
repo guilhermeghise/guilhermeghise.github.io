@@ -1,0 +1,29 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  background: var(--ios-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  z-index: 99998;
+}
+
+.splash-monogram {
+  display: flex;
+  gap: 2px;
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ios-text);
+}
+
+.splash-bar {
+  width: 40px;
+  height: 3px;
+  background: var(--ios-blue);
+  border-radius: 99px;
+  transform-origin: left center;
+}

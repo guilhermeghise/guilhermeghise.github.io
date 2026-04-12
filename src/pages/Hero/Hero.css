@@ -1,0 +1,84 @@
+.hero {
+  position: relative; /* Importante para o posicionamento absoluto das tags */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+  background-color: var(--ios-bg);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centraliza o bloco Nome + Frase perfeitamente na tela */
+  transform: translateY(-20px); 
+}
+
+.hero h1 {
+  font-size: 8rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  margin: 0;
+  color: var(--ios-text);
+}
+
+.hero-tagline {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--ios-secondary);
+  opacity: 0.5;
+  max-width: 460px;
+  text-align: center;
+  margin-top: 5px; 
+}
+
+/* ESTILIZAÇÃO DO FOOTER TÉCNICO */
+.hero-footer-tags {
+  position: absolute;
+  bottom: 85px; /* Ajustado para ficar em harmonia com o scroll-hint */
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  pointer-events: none; /* Garante que não atrapalhe cliques */
+}
+
+.hero-footer-tags span {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 600; /* Um pouco mais de corpo na fonte */
+  color: var(--ios-text); /* Usando a cor principal de texto em vez da secundária */
+  opacity: 0.6; /* De 0.3 para 0.6 para dar nitidez */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* O ponto separador também ganha um pouco mais de presença */
+.hero-footer-tags span:not(:last-child)::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background-color: var(--ios-text);
+  border-radius: 50%;
+  margin-left: 16px;
+  opacity: 0.4;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 35px;
+  opacity: 0.5; /* Seta de scroll levemente mais clara também */
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 3.5rem; }
+  .hero-footer-tags { bottom: 120px; } /* Ajuste para não bater no dock de celulares */
+}
