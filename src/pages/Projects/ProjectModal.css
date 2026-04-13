@@ -175,11 +175,23 @@
 }
 
 /* ── ÁREA DE SCROLL ─────────────────────────────────────────────── */
+.project-modal-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  padding-top: 64px;
+}
 
+.project-modal-scroll-area::-webkit-scrollbar {
+  display: none;
+}
 
 .project-section {
   width: 100%;
   min-height: calc(92vh - 64px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;

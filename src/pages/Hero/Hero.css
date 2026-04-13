@@ -28,13 +28,13 @@
 }
 
 .hero-tagline {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: 400;
   color: var(--ios-secondary);
   opacity: 0.5;
-  max-width: 460px;
+  max-width: 800px;
   text-align: center;
-  margin-top: 5px; 
+  margin-top: 8px; 
 }
 
 /* ESTILIZAÇÃO DO FOOTER TÉCNICO */

@@ -7,6 +7,7 @@ import logoGlyptis from './assets/glyptis-logo.png';
 import coffeeCover from './assets/coffee-cover.svg';
 import coffeePreview1 from './assets/coffee-preview1.svg';
 import coffeePreview2 from './assets/coffee-preview2.svg';
+import coffeePreview3 from './assets/coffee-preview3.svg';
 import foodSwapMock from './assets/foodswap1.svg';
 import zoomiesMock from './assets/zoomies1.svg';
 import glyptisMock from './assets/glyptis1.svg';
@@ -14,7 +15,7 @@ import glyptisMock from './assets/glyptis1.svg';
 // Assets internos do Food Swap
 import foodswapimage2 from './assets/foodswap2.svg';
 import foodswapimage3 from './assets/foodswap3.svg';
-import foodswapimage4 from './assets/foodswap4.svg';
+
 
 export const projects = [
   { 
@@ -29,7 +30,8 @@ export const projects = [
     fullDesc: "One barista. One tray. Zero tolerance for spills. Coffee Overflow is an arcade game...",
     media: [
       { type: "image", src: coffeePreview1 }, 
-      { type: "image", src: coffeePreview2 }
+      { type: "image", src: coffeePreview2 },
+      { type: "image", src: coffeePreview3 },
     ],
     technologies: ["Swift", "SwiftUI", "SpriteKit"],
     team: [
