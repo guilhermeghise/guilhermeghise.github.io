@@ -6,7 +6,7 @@ export const translations = {
       projects: 'PROJECTS',
       contact:  'CONTACT',
     },
-    hero:     { tagline: 'Thinking beyond code to solve real problems' },
+    hero:     { tagline: 'thinking beyond code to solve real problems' },
     about:    { title: 'About Me' },
     projects: { title: 'My Projects' },
     contact: { 
