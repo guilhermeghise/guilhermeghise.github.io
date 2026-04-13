@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.ec2a1e13.css",
-    "main.js": "/static/js/main.c979ad69.js",
+    "main.css": "/static/css/main.59e62783.css",
+    "main.js": "/static/js/main.bdf4012f.js",
     "static/media/coffee-cover.svg": "/static/media/coffee-cover.0b7b23e06f35c9b870271b89d95f45b9.svg",
     "static/media/coffee-preview2.svg": "/static/media/coffee-preview2.557553beced769b4d92452f6315bc3c5.svg",
     "static/media/coffee-preview1.svg": "/static/media/coffee-preview1.517ee26cfe90e2f7315f789686f631d8.svg",
+    "static/media/coffee-preview3.svg": "/static/media/coffee-preview3.96966cc60060900cc8a588080329d108.svg",
     "static/media/glyptis-logo.png": "/static/media/glyptis-logo.c3c4ab285e3dda27bb52.png",
     "static/media/food-swap-logo.png": "/static/media/food-swap-logo.905ba9daabed851c418b.png",
     "static/media/zoomies1.svg": "/static/media/zoomies1.2a97f68216dbdf0b753af2042c80d6e4.svg",
     "static/media/foodswap3.svg": "/static/media/foodswap3.46f09656591c20254aeede6d4acebc54.svg",
     "static/media/foodswap2.svg": "/static/media/foodswap2.b4270e74eb9b0fe7dd4972b5339210a7.svg",
-    "static/media/foodswap4.svg": "/static/media/foodswap4.c3653208245b8700a098c39da2584470.svg",
     "static/media/foodswap1.svg": "/static/media/foodswap1.736ad51d9934e8f76df6dd7cf31df687.svg",
     "static/media/coffee-overflow-logo.jpeg": "/static/media/coffee-overflow-logo.14041297b57aac457593.jpeg",
     "static/media/foto-about.jpeg": "/static/media/foto-about.93d1afcd2e6dcfc653f0.jpeg",
     "static/media/zoomies-logo.png": "/static/media/zoomies-logo.bfb816a54560c06834e9.png",
     "static/media/glyptis1.svg": "/static/media/glyptis1.4637b138a3f8a12ffab0762e595d4798.svg",
     "index.html": "/index.html",
-    "main.ec2a1e13.css.map": "/static/css/main.ec2a1e13.css.map",
-    "main.c979ad69.js.map": "/static/js/main.c979ad69.js.map"
+    "main.59e62783.css.map": "/static/css/main.59e62783.css.map",
+    "main.bdf4012f.js.map": "/static/js/main.bdf4012f.js.map"
   },
   "entrypoints": [
-    "static/css/main.ec2a1e13.css",
-    "static/js/main.c979ad69.js"
+    "static/css/main.59e62783.css",
+    "static/js/main.bdf4012f.js"
   ]
 }
