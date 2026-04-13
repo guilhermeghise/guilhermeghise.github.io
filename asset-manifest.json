@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.59e62783.css",
-    "main.js": "/static/js/main.bdf4012f.js",
+    "main.css": "/static/css/main.d0740e3f.css",
+    "main.js": "/static/js/main.1afaeabf.js",
     "static/media/coffee-cover.svg": "/static/media/coffee-cover.0b7b23e06f35c9b870271b89d95f45b9.svg",
     "static/media/coffee-preview2.svg": "/static/media/coffee-preview2.557553beced769b4d92452f6315bc3c5.svg",
     "static/media/coffee-preview1.svg": "/static/media/coffee-preview1.517ee26cfe90e2f7315f789686f631d8.svg",
@@ -17,11 +17,11 @@
     "static/media/zoomies-logo.png": "/static/media/zoomies-logo.bfb816a54560c06834e9.png",
     "static/media/glyptis1.svg": "/static/media/glyptis1.4637b138a3f8a12ffab0762e595d4798.svg",
     "index.html": "/index.html",
-    "main.59e62783.css.map": "/static/css/main.59e62783.css.map",
-    "main.bdf4012f.js.map": "/static/js/main.bdf4012f.js.map"
+    "main.d0740e3f.css.map": "/static/css/main.d0740e3f.css.map",
+    "main.1afaeabf.js.map": "/static/js/main.1afaeabf.js.map"
   },
   "entrypoints": [
-    "static/css/main.59e62783.css",
-    "static/js/main.bdf4012f.js"
+    "static/css/main.d0740e3f.css",
+    "static/js/main.1afaeabf.js"
   ]
 }
