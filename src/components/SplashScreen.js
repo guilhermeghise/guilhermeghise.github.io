@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { APPLE_EASE } from '../constants/animations';
 import './SplashScreen.css';
 
-const LETTERS = ['Welcome! =)'];
+const LETTERS = ['GG'];
 
 const SplashScreen = ({ onDone }) => {
   const [phase, setPhase] = useState('enter'); // enter → hold → exit
