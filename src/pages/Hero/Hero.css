@@ -1,5 +1,5 @@
 .hero {
-  position: relative; /* Importante para o posicionamento absoluto das tags */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,12 +14,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centraliza o bloco Nome + Frase perfeitamente na tela */
-  transform: translateY(-20px); 
+  transform: translateY(-20px);
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero h1 {
-  font-size: 8rem;
+  font-size: clamp(3rem, 12vw, 8rem);
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 0.85;
@@ -28,39 +30,48 @@
 }
 
 .hero-tagline {
-  font-size: 1.8rem;
+  font-size: clamp(1rem, 3vw, 1.8rem);
   font-weight: 200;
   color: var(--ios-secondary);
   opacity: 0.5;
   max-width: 800px;
   text-align: center;
-  margin-top: 8px; 
+  margin-top: 8px;
+  padding: 0 16px;
 }
 
-/* ESTILIZAÇÃO DO FOOTER TÉCNICO */
-.hero-footer-tags {
+/* FOOTER TÉCNICO */
+.hero-bottom {
   position: absolute;
-  bottom: 85px; /* Ajustado para ficar em harmonia com o scroll-hint */
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.hero-footer-tags {
   display: flex;
   gap: 16px;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  pointer-events: none; /* Garante que não atrapalhe cliques */
+  flex-wrap: wrap;
+  padding: 0 24px;
 }
 
 .hero-footer-tags span {
   display: inline-flex;
   align-items: center;
   font-size: 0.7rem;
-  font-weight: 600; /* Um pouco mais de corpo na fonte */
-  color: var(--ios-text); /* Usando a cor principal de texto em vez da secundária */
-  opacity: 0.6; /* De 0.3 para 0.6 para dar nitidez */
+  font-weight: 600;
+  color: var(--ios-text);
+  opacity: 0.6;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-/* O ponto separador também ganha um pouco mais de presença */
 .hero-footer-tags span:not(:last-child)::after {
   content: "";
   width: 4px;
@@ -72,13 +83,27 @@
 }
 
 .scroll-hint {
-  position: absolute;
-  bottom: 35px;
-  opacity: 0.5; /* Seta de scroll levemente mais clara também */
+  opacity: 0.5;
   animation: bounce 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@media (max-width: 768px) {
-  .hero h1 { font-size: 3.5rem; }
-  .hero-footer-tags { bottom: 120px; } /* Ajuste para não bater no dock de celulares */
+@media (max-width: 480px) {
+  .hero-content {
+    transform: translateY(-10px);
+  }
+
+  .hero-bottom {
+    bottom: 24px;
+    gap: 12px;
+  }
+
+  .hero-footer-tags {
+    gap: 10px;
+  }
+
+  /* Hide separators between tags on very small screens */
+  .hero-footer-tags span:not(:last-child)::after {
+    display: none;
+  }
 }

@@ -4,6 +4,17 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+}
+
+.projects-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  animation: bounce 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .projects-grid {
@@ -17,7 +28,7 @@
 
 /* ── Lista de projetos ── */
 .projects-text h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   margin-bottom: 40px;
   letter-spacing: -0.02em;
@@ -49,7 +60,7 @@
 }
 
 .project-item h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   font-weight: 600;
   margin: 0 0 4px;
 }
@@ -104,17 +115,59 @@
   object-fit: cover;
 }
 
-/* ── Responsivo ── */
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .projects-section {
+    padding: 100px 48px;
   }
 
-  .projects-section {
-    padding: 80px 24px;
+  .projects-grid {
+    gap: 48px;
   }
 
   .iphone-frame {
-    height: 480px;
+    height: 500px;
+  }
+}
+
+/* ── Mobile: stacked layout ── */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 80px 24px 100px;
+    align-items: flex-start;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* iPhone mockup goes first on mobile */
+  .projects-visual {
+    order: -1;
+    margin-bottom: 40px;
+  }
+
+  .iphone-frame {
+    height: 380px;
+  }
+
+  .project-item.active {
+    transform: translateX(6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-section {
+    padding: 80px 20px 80px;
+  }
+
+  .iphone-frame {
+    height: 320px;
+    border-radius: 36px;
+  }
+
+  .iphone-screen {
+    border-radius: 28px;
   }
 }

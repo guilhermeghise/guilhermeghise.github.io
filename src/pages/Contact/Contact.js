@@ -14,14 +14,20 @@ const SOCIAL_LINKS = [
 const Contact = ({ t, openCV }) => (
   <div className="contact-section">
     <div className="contact-grid">
+
+      {/* Title spans both columns — row 1 */}
+      <motion.h2 className="contact-title" {...fadeLeft}>
+        {t.title}
+      </motion.h2>
+
+      {/* Form — row 2, col 1 */}
       <motion.div className="contact-left" {...fadeLeft}>
-        <h2>{t.title}</h2>
-        {/* Passando as traduções do form aqui */}
-        <ContactForm t={t.form} /> 
+        <ContactForm t={t.form} />
       </motion.div>
-      
+
+      {/* Social links — row 2, col 2 — naturally aligned with form top */}
       <motion.div className="contact-right" {...fadeRight}>
-        <span className="contact-links-label">Find me on</span>
+        <span className="contact-links-label">{t.findMeOn}</span>
         <div className="contact-social-links">
           {SOCIAL_LINKS.map(({ label, href, icon }) => (
             <a key={label} href={href} target="_blank" rel="noreferrer" className="social-button">
@@ -35,6 +41,7 @@ const Contact = ({ t, openCV }) => (
           </button>
         </div>
       </motion.div>
+
     </div>
   </div>
 );

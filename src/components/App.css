@@ -65,3 +65,25 @@ img {
   width: 100%;
   box-sizing: border-box;
 }
+/* ── Global Mobile Fixes ── */
+@media (max-width: 768px) {
+  /* Allow sections to be taller than viewport on mobile for content-heavy sections */
+  .portfolio-container > section {
+    scroll-snap-align: start;
+    min-height: 100svh; /* Use svh (small viewport height) on mobile — avoids address bar issues */
+  }
+
+  /* Disable mandatory snap on mobile so users can freely scroll tall sections */
+  .portfolio-container {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Prevent horizontal overflow globally */
+* {
+  max-width: 100%;
+}
+
+img, video, iframe {
+  max-width: 100%;
+}

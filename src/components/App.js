@@ -9,13 +9,13 @@ import Projects from '../pages/Projects/Projects';
 import Contact from '../pages/Contact/Contact';
 import ProjectModal from '../pages/Projects/ProjectModal';
 import CVModal from '../pages/Resume/CVModal';
-import CustomCursor from './CustomCursor';
 import SplashScreen from './SplashScreen';
 
 import { useTheme, useLang } from '../hooks/useSettings';
 import { translations } from '../constants/translations';
 import { projects } from '../data';
 import fotoAbout from '../assets/foto-about.jpeg';
+import memoji from '../assets/memoji.svg';
 import './App.css';
 
 function Home() {
@@ -27,6 +27,13 @@ function Home() {
   const [splashDone, setSplashDone] = useState(false);
 
   const t = translations[lang];
+
+  // Mescla desc/fullDesc traduzidos nos projetos
+  const translatedProjects = projects.map((p) => ({
+    ...p,
+    desc:     t.projects.items[p.slug]?.desc     ?? p.desc,
+    fullDesc: t.projects.items[p.slug]?.fullDesc ?? p.fullDesc,
+  }));
 
   const sectionRefs = {
     hero:     useRef(null),
@@ -40,7 +47,6 @@ function Home() {
 
   return (
     <>
-      <CustomCursor />
 
       <AnimatePresence>
         {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
@@ -57,17 +63,17 @@ function Home() {
         />
 
         <section ref={sectionRefs.hero}>
-          <Hero tagline={t.hero.tagline} />
+          <Hero t={t.hero} />
         </section>
 
         <section ref={sectionRefs.about}>
-          <About lang={lang} title={t.about.title} fotoAbout={fotoAbout} />
+        <About lang={lang} t={t.about} fotoAbout={fotoAbout} memoji={memoji} />
         </section>
 
         <section ref={sectionRefs.projects}>
           <Projects
             title={t.projects.title}
-            projects={projects}
+            projects={translatedProjects}
             activeIndex={activeProjectIndex}
             setActiveIndex={setActiveProjectIndex}
             onOpenProject={(i) => setSelectedProjectIndex(i)}
@@ -81,10 +87,11 @@ function Home() {
         <AnimatePresence>
           {selectedProjectIndex !== null && (
             <ProjectModal
-              projects={projects}
+              projects={translatedProjects}
               initialIndex={selectedProjectIndex}
               onClose={() => setSelectedProjectIndex(null)}
               theme={theme}
+              tModal={t.projects.modal}
             />
           )}
           {isCVModalOpen && (
