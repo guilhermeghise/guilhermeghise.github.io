@@ -9,7 +9,6 @@ import Projects from '../pages/Projects/Projects';
 import Contact from '../pages/Contact/Contact';
 import ProjectModal from '../pages/Projects/ProjectModal';
 import CVModal from '../pages/Resume/CVModal';
-import SplashScreen from './SplashScreen';
 
 import { useTheme, useLang } from '../hooks/useSettings';
 import { translations } from '../constants/translations';
@@ -24,7 +23,6 @@ function Home() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
-  const [splashDone, setSplashDone] = useState(false);
 
   const t = translations[lang];
 
@@ -47,10 +45,6 @@ function Home() {
 
   return (
     <>
-
-      <AnimatePresence>
-        {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
-      </AnimatePresence>
 
       <div className="portfolio-container">
         <Navbar

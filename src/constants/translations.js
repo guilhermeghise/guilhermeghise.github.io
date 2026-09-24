@@ -50,19 +50,6 @@ export const translations = {
       title: 'Want to talk about an idea or project?',
       cv: 'View CV',
       findMeOn: 'Find me on',
-      form: {
-        name: 'Name',
-        namePlaceholder: "What's your name?",
-        email: 'Email',
-        emailPlaceholder: 'your@email.com',
-        message: 'Message',
-        messagePlaceholder: 'What should we build together?',
-        send: 'Send message',
-        sending: 'Sending...',
-        successTitle: 'Message sent!',
-        successText: "I'll get back to you as soon as possible.",
-        backBtn: 'Send another'
-      }
     },
   },
 
@@ -116,19 +103,6 @@ export const translations = {
       title: 'Quer conversar sobre uma ideia ou projeto?',
       cv: 'Ver Currículo',
       findMeOn: 'Me encontre em',
-      form: {
-        name: 'Nome',
-        namePlaceholder: 'Qual o seu nome?',
-        email: 'E-mail',
-        emailPlaceholder: 'seu@email.com',
-        message: 'Mensagem',
-        messagePlaceholder: 'O que vamos construir juntos?',
-        send: 'Enviar mensagem',
-        sending: 'Enviando...',
-        successTitle: 'Mensagem enviada!',
-        successText: 'Responderei o mais breve possível.',
-        backBtn: 'Enviar outra'
-      }
     },
   },
 };

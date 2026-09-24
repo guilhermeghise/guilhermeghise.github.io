@@ -30,32 +30,12 @@ const TeamCard = ({ member }) => (
   </a>
 );
 
-const MediaCard = ({ item, isCenter, onClick }) => {
-  const videoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true);
-  const toggleMute = (e) => {
-    e.preventDefault(); e.stopPropagation();
-    if (videoRef.current) { const m = !isMuted; videoRef.current.muted = m; setIsMuted(m); }
-  };
-  return (
-    <div className={`media-vertical-card ${isCenter ? 'is-center' : ''}`} onClick={onClick}>
-      {item.type === 'video' ? (
-        <div className="video-player-wrapper">
-          <video ref={videoRef} src={item.src} className="card-media-content" autoPlay loop muted={isMuted} playsInline />
-          <button className="media-mute-overlay-btn" onClick={toggleMute}>
-            {isMuted
-              ? <svg viewBox="0 0 24 24" width="14" height="14" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM19 12c0 3.12-1.86 5.8-4.5 6.97v2.05c3.77-1.22 6.5-4.81 6.5-9.02s-2.73-7.8-6.5-9.02v2.05c2.64 1.17 4.5 3.85 4.5 6.97zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.41.32-.85.58-1.33.76v2.05c1.03-.22 1.98-.67 2.8-1.3l2.27 2.27 1.27-1.27L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-              : <svg viewBox="0 0 24 24" width="14" height="14" fill="white"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-            }
-          </button>
-        </div>
-      ) : (
-        <img src={item.src} alt="App screenshot" className="card-media-content" />
-      )}
-      {item.type !== 'video' && <div className="card-glass-overlay" />}
+const MediaCard = ({ item, isCenter }) => (
+    <div className={`media-vertical-card ${isCenter ? 'is-center' : ''}`}>
+      <img src={item.src} alt="App screenshot" className="card-media-content" />
+      <div className="card-glass-overlay" />
     </div>
-  );
-};
+);
 
 const InfiniteCarousel = ({ items, accent }) => {
   const total  = items.length;

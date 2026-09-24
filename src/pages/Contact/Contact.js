@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { fadeLeft, fadeRight } from '../../constants/animations';
-import ContactForm from '../../components/ContactForm';
 import './Contact.css';
 
 const SOCIAL_LINKS = [
@@ -15,17 +14,10 @@ const Contact = ({ t, openCV }) => (
   <div className="contact-section">
     <div className="contact-grid">
 
-      {/* Title spans both columns — row 1 */}
       <motion.h2 className="contact-title" {...fadeLeft}>
         {t.title}
       </motion.h2>
 
-      {/* Form — row 2, col 1 */}
-      <motion.div className="contact-left" {...fadeLeft}>
-        <ContactForm t={t.form} />
-      </motion.div>
-
-      {/* Social links — row 2, col 2 — naturally aligned with form top */}
       <motion.div className="contact-right" {...fadeRight}>
         <span className="contact-links-label">{t.findMeOn}</span>
         <div className="contact-social-links">

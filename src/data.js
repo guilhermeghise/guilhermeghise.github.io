@@ -1,7 +1,6 @@
 // Coffee Overflow
 import logoCoffeeOverflow from './assets/coffee-overflow/coffee-overflow-logo.jpeg';
 // import coffeeCover from './assets/coffee-overflow/coffee-cover.svg';
-// import coffeeVideo from './assets/coffee-overflow/coffee-video.mp4';
 import coffeePreview1 from './assets/coffee-overflow/coffee-preview1.svg';
 import coffeePreview2 from './assets/coffee-overflow/coffee-preview2.svg'
 import coffeePreview3 from './assets/coffee-overflow/coffee-preview3.svg';
@@ -43,7 +42,6 @@ export const projects = [
     accent: '#0A6ABB', 
     fullDesc: "Coffee Overflow is an arcade game where you play as a barista sliding across the screen to catch coffee cups launched from a machine. You must balance your tray to avoid spills, collect the right cups, and complete cycles by drawing latte art. As the game progresses, the pace and chaos increase, making precision and timing essential to survive.",
     media: [
-      { type: "video", src: "https://www.pexels.com/download/video/15439756/"  },
       { type: "image", src: coffeePreview1 }, 
       { type: "image", src: coffeePreview2 },
       { type: "image", src: coffeePreview3 },
@@ -69,7 +67,6 @@ export const projects = [
     accent: '#FCDDA7',
     fullDesc: "Food Swap turns mealtime indecision into a fun game...",
     media: [
-      { type: "video", src: "https://www.pexels.com/download/video/15439756/"  },
       { type: "image", src: foodSwapPreview1 }, 
       { type: "image", src: foodSwapPreview2 },
       { type: "image", src: foodSwapPreview3 },
@@ -95,7 +92,6 @@ export const projects = [
     accent: '#99ED00',
     fullDesc: "In Zoomies, every step counts! Walking or running has never been this fun.",
   media: [
-      { type: "video", src: "https://www.pexels.com/download/video/15439756/"  },
       { type: "image", src: ZoomiesPreview1 }, 
       { type: "image", src: ZoomiesPreview2 },
       { type: "image", src: ZoomiesPreview3 },
@@ -121,7 +117,6 @@ export const projects = [
     accent: '#173448',
     fullDesc: "Sculpt, paint, and see your creations in Augmented Reality.",
    media: [
-      { type: "video", src: "https://www.pexels.com/download/video/15439756/"  },
       { type: "image", src: GlyptisPreview1 }, 
       { type: "image", src: GlyptisPreview2 },
       { type: "image", src: GlyptisPreview3 },
