@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { fadeLeft, fadeRight, APPLE_EASE } from '../../constants/animations';
+import { fadeLeft, APPLE_EASE } from '../../constants/animations';
 import './Projects.css';
 
 const IPhoneMock = ({ project }) => (
@@ -52,9 +52,9 @@ const Projects = ({ title, projects, activeIndex, setActiveIndex, onOpenProject 
           </div>
         </motion.div>
 
-        <motion.div className="projects-visual" {...fadeRight}>
+        <div className="projects-visual">
           <IPhoneMock project={projects[activeIndex]} />
-        </motion.div>
+        </div>
       </div>
 
       <div className="scroll-hint projects-scroll-hint" aria-hidden="true">
