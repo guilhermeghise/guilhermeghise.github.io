@@ -80,6 +80,7 @@
 
 .iphone-frame {
   position: relative;
+  flex-shrink: 0;
   height: 600px;
   aspect-ratio: 9 / 19.5;
   background: #000;
