@@ -9,7 +9,6 @@ import Projects from '../pages/Projects/Projects';
 import Contact from '../pages/Contact/Contact';
 import ProjectModal from '../pages/Projects/ProjectModal';
 import CVModal from '../pages/Resume/CVModal';
-import StickerCursor from './StickerCursor';
 
 import { useTheme, useLang } from '../hooks/useSettings';
 import { translations } from '../constants/translations';
@@ -46,7 +45,6 @@ function Home() {
 
   return (
     <>
-      <StickerCursor />
 
       <div className="portfolio-container">
         <Navbar
