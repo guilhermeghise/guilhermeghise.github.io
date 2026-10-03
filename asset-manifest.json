@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.59727ec4.css",
-    "main.js": "/static/js/main.91fd5d3c.js",
+    "main.css": "/static/css/main.f93739bd.css",
+    "main.js": "/static/js/main.2907e735.js",
     "static/media/coffee-preview2.svg": "/static/media/coffee-preview2.b05b65d888ac675bc461198a516eb8af.svg",
     "static/media/glyptis-preview1.svg": "/static/media/glyptis-preview1.3b088f7c0bd0133eb4f8eeee2d54985b.svg",
     "static/media/glyptis-preview4.svg": "/static/media/glyptis-preview4.4ae495fa1e5135c1a9b32918e130bf45.svg",
@@ -23,15 +23,14 @@
     "static/media/foodswap4.svg": "/static/media/foodswap4.c3653208245b8700a098c39da2584470.svg",
     "static/media/foodswap1.svg": "/static/media/foodswap1.736ad51d9934e8f76df6dd7cf31df687.svg",
     "static/media/coffee-overflow-logo.jpeg": "/static/media/coffee-overflow-logo.14041297b57aac457593.jpeg",
-    "static/media/valeuuuu-cursor.png": "/static/media/valeuuuu-cursor.88aea3c2ff899f943230.png",
     "static/media/foto-about.jpeg": "/static/media/foto-about.93d1afcd2e6dcfc653f0.jpeg",
     "static/media/zoomies-logo.png": "/static/media/zoomies-logo.bfb816a54560c06834e9.png",
     "index.html": "/index.html",
-    "main.59727ec4.css.map": "/static/css/main.59727ec4.css.map",
-    "main.91fd5d3c.js.map": "/static/js/main.91fd5d3c.js.map"
+    "main.f93739bd.css.map": "/static/css/main.f93739bd.css.map",
+    "main.2907e735.js.map": "/static/js/main.2907e735.js.map"
   },
   "entrypoints": [
-    "static/css/main.59727ec4.css",
-    "static/js/main.91fd5d3c.js"
+    "static/css/main.f93739bd.css",
+    "static/js/main.2907e735.js"
   ]
 }
