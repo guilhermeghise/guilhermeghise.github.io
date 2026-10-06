@@ -3,7 +3,7 @@ import ProjectModal from './ProjectModal';
 import { projects } from '../../data';
 import { translations } from '../../constants/translations';
 
-test('carousel remains navigable and resets when changing projects', () => {
+test('project details show the gallery and switch between projects', () => {
   const originalScrollTo = HTMLElement.prototype.scrollTo;
   HTMLElement.prototype.scrollTo = jest.fn();
   const { container, unmount } = render(
@@ -11,14 +11,18 @@ test('carousel remains navigable and resets when changing projects', () => {
       theme="light" tModal={translations.en.projects.modal} />
   );
   try {
-    for (const index of [1, 2, 3, 0]) {
-      fireEvent.click(screen.getByRole('button', { name: `Show screenshot ${index + 1}` }));
-      expect(container.querySelectorAll('.carousel-dot')[index].getAttribute('aria-current')).toBe('true');
-      fireEvent.transitionEnd(container.querySelector('.carousel-track'), { propertyName: 'transform' });
-    }
+    expect(screen.getByRole('heading', { name: 'Coffee Overflow' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Open image: Coffee Overflow screenshot 1' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Open image: Coffee Overflow screenshot 1' }));
+    expect(screen.getByRole('img', { name: 'Coffee Overflow preview' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Close image' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Next screenshot' }));
+    expect(screen.getByRole('button', { name: 'Open image: Coffee Overflow screenshot 2' })).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Next project' }));
     expect(screen.getByRole('heading', { name: 'Food Swap' })).toBeTruthy();
-    expect(container.querySelector('.carousel-dot').getAttribute('aria-current')).toBe('true');
+    expect(screen.getByRole('img', { name: 'Food Swap screenshot 1' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Previous project' }));
+    expect(screen.getByRole('heading', { name: 'Coffee Overflow' })).toBeTruthy();
   } finally {
     unmount();
     HTMLElement.prototype.scrollTo = originalScrollTo;

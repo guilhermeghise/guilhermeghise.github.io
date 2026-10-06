@@ -1,204 +1,79 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, QrCode, Smartphone } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { APPLE_EASE } from '../../constants/animations';
 import './ProjectModal.css';
-import { QRCodeSVG } from 'qrcode.react';
-
-const AppQRCode = ({ url, theme }) => (
-  <div className="app-qr-wrapper">
-    <div className="qr-container" style={{ padding: '12px', background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)', borderRadius: '16px' }}>
-      <QRCodeSVG 
-        value={url} 
-        size={100} 
-        bgColor="transparent"
-        fgColor={theme === 'dark' ? '#FFFFFF' : '#000000'} 
-        level="M" 
-        marginSize={0} 
-      />
-    </div>
-  </div>
-);
 
 const TeamCard = ({ member }) => (
   <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="team-card">
-    <div className="team-card-top">
-      <span className="member-name">{member.name}</span>
-      <span className="member-arrow">↗</span>
-    </div>
+    <span className="member-name">{member.name}</span>
     <span className="member-role-badge" data-role={member.role.toLowerCase()}>{member.role}</span>
+    <span className="member-arrow" aria-hidden="true">↗</span>
   </a>
 );
 
-const MediaCard = ({ item, isCenter }) => (
-    <div className={`media-vertical-card ${isCenter ? 'is-center' : ''}`}>
-      <img src={item.src} alt="App screenshot" className="card-media-content" loading={isCenter ? 'eager' : 'lazy'} decoding="async" width="200" height="380" />
-      <div className="card-glass-overlay" />
-    </div>
-);
+const ProjectGallery = ({ media, title, accent, label, tModal, onPreview }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeMedia = media[activeIndex];
+  const imageLabel = `${title} screenshot ${activeIndex + 1}`;
 
-const InfiniteCarousel = ({ items, accent }) => {
-  const reduceMotion = useReducedMotion();
-  const total  = items.length;
-  const COPIES = 5;
-  const MID    = 2;
-  const penta  = Array.from({ length: COPIES }, () => items).flat();
-
-  const offsetRef   = useRef(0);
-  const busyRef     = useRef(false);
-  const trackRef    = useRef(null);
-  const viewportRef = useRef(null);
-  const [displayIdx, setDisplayIdx] = useState(0);
-
-  const dragRef  = useRef({ dragging: false, startX: 0, startTx: 0 });
-  const touchRef = useRef({ startX: 0, startTx: 0 });
-
-  const txForAbsolute = useCallback((absIdx) => {
-    const track = trackRef.current;
-    const vp    = viewportRef.current;
-    if (!track || !vp) return 0;
-    const slot = track.children[absIdx];
-    if (!slot) return 0;
-    return vp.offsetWidth / 2 - (slot.offsetLeft + slot.offsetWidth / 2);
-  }, []);
-
-  const applyTx = useCallback((tx, animated) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = animated
-      ? `transform ${reduceMotion ? '0.001s' : '0.44s'} cubic-bezier(0.4, 0, 0.2, 1)`
-      : 'none';
-    track.style.transform = `translateX(${tx}px)`;
-  }, [reduceMotion]);
-
-  const absIdx = useCallback(() => MID * total + offsetRef.current, [total]);
-
-  useEffect(() => {
-    offsetRef.current = 0;
-    busyRef.current   = false;
-    setDisplayIdx(0);
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => applyTx(txForAbsolute(MID * total), false))
-    );
-  }, [items, total, applyTx, txForAbsolute]);
-
-  const go = useCallback((dir) => {
-    if (busyRef.current) return;
-    busyRef.current = true;
-    offsetRef.current += dir;
-    setDisplayIdx(((offsetRef.current % total) + total) % total);
-    applyTx(txForAbsolute(absIdx()), true);
-  }, [total, absIdx, applyTx, txForAbsolute]);
-
-  const goTo = useCallback((logIdx) => {
-    if (busyRef.current) return;
-    const cur = ((offsetRef.current % total) + total) % total;
-    if (logIdx === cur) return;
-    busyRef.current = true;
-    let diff = logIdx - cur;
-    if (diff > total / 2)  diff -= total;
-    if (diff < -total / 2) diff += total;
-    offsetRef.current += diff;
-    setDisplayIdx(logIdx);
-    applyTx(txForAbsolute(absIdx()), true);
-  }, [total, absIdx, applyTx, txForAbsolute]);
-
-  const onTransitionEnd = () => {
-    busyRef.current = false;
-    if (offsetRef.current >= total || offsetRef.current <= -total) {
-      const wrapped = ((offsetRef.current % total) + total) % total;
-      offsetRef.current = wrapped;
-      const tx = txForAbsolute(MID * total + wrapped);
-      applyTx(tx, false);
-    }
-  };
-
-  const getCurrentTx = () => {
-    const track = trackRef.current;
-    if (!track) return 0;
-    return new DOMMatrixReadOnly(getComputedStyle(track).transform).m41;
-  };
-
-  const onMouseDown = (e) => {
-    if (e.button !== 0) return;
-    e.preventDefault();
-    dragRef.current = { dragging: true, startX: e.clientX, startTx: getCurrentTx() };
-    if (trackRef.current) trackRef.current.style.transition = 'none';
-  };
-  const onMouseMove = (e) => {
-    if (!dragRef.current.dragging) return;
-    const delta = e.clientX - dragRef.current.startX;
-    if (trackRef.current)
-      trackRef.current.style.transform = `translateX(${dragRef.current.startTx + delta}px)`;
-  };
-  const onMouseUp = (e) => {
-    if (!dragRef.current.dragging) return;
-    const delta = e.clientX - dragRef.current.startX;
-    dragRef.current.dragging = false;
-    if (Math.abs(delta) > 50) go(delta < 0 ? 1 : -1);
-    else applyTx(txForAbsolute(absIdx()), true);
+  const move = (direction) => {
+    setActiveIndex((index) => (index + direction + media.length) % media.length);
   };
 
   return (
-    <div className="carousel-root">
-      {/* <button className="carousel-arrow carousel-arrow-left" style={{ '--accent': accent }} onClick={() => go(-1)}>
-        <ChevronLeft size={18} />
-      </button> */}
-
-      <div
-        className="carousel-viewport"
-        ref={viewportRef}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={() => dragRef.current.dragging && onMouseUp({ clientX: dragRef.current.startX })}
-        onTouchStart={(e) => {
-          touchRef.current = { startX: e.touches[0].clientX, startTx: getCurrentTx() };
-          if (trackRef.current) trackRef.current.style.transition = 'none';
-        }}
-        onTouchMove={(e) => {
-          const delta = e.touches[0].clientX - touchRef.current.startX;
-          if (trackRef.current) trackRef.current.style.transform = `translateX(${touchRef.current.startTx + delta}px)`;
-        }}
-        onTouchEnd={(e) => {
-          const delta = e.changedTouches[0].clientX - touchRef.current.startX;
-          if (Math.abs(delta) > 50) go(delta < 0 ? 1 : -1);
-          else applyTx(txForAbsolute(absIdx()), true);
-        }}
-        style={{ cursor: 'grab', userSelect: 'none' }}
-      >
-        <div ref={trackRef} className="carousel-track" onTransitionEnd={onTransitionEnd}>
-          {penta.map((item, i) => {
-            const logIdx   = i % total;
-            const isActive = (i >= MID * total && i < (MID + 1) * total) && logIdx === displayIdx;
-            return (
-              <div
-                key={i}
-                className={`carousel-card-slot${isActive ? ' is-center' : ''}`}
-                onClick={() => { if (!dragRef.current.dragging && !isActive) goTo(logIdx); }}
-              >
-                <MediaCard item={item} isCenter={isActive} />
-              </div>
-            );
-          })}
-        </div>
+    <div className="project-gallery" style={{ '--project-accent': accent }}>
+      <div className="project-gallery-heading">
+        <span className="section-label">{label}</span>
       </div>
 
-      {/* <button className="carousel-arrow carousel-arrow-right" style={{ '--accent': accent }} onClick={() => go(1)}>
-        <ChevronRight size={18} />
-      </button> */}
-
-      <div className="carousel-dots">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            className={`carousel-dot${i === displayIdx ? ' active' : ''}`}
-            style={i === displayIdx ? { background: accent } : {}}
-            onClick={() => goTo(i)}
-            aria-label={`Show screenshot ${i + 1}`}
-            aria-current={i === displayIdx ? 'true' : undefined}
+      <div className="project-carousel-stage">
+        <button
+          className="project-media-button"
+          onClick={() => onPreview(activeMedia)}
+          aria-label={`${tModal.openImage || 'Open image'}: ${imageLabel}`}
+        >
+          <motion.img
+            key={activeMedia.src}
+            src={activeMedia.src}
+            alt={imageLabel}
+            className="project-carousel-image"
+            loading="eager"
+            decoding="async"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
           />
-        ))}
+          <span className="project-media-zoom" aria-hidden="true">⌕</span>
+        </button>
+      </div>
+
+      <div className="project-carousel-controls">
+        <button
+          className="project-carousel-arrow"
+          onClick={() => move(-1)}
+          aria-label={tModal.previousScreenshot || 'Previous screenshot'}
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <div className="project-carousel-dots">
+          {media.map((item, index) => (
+            <button
+              key={item.src}
+              className={`project-carousel-dot${index === activeIndex ? ' active' : ''}`}
+              onClick={() => setActiveIndex(index)}
+              aria-label={`${tModal.openImage || 'Open image'} ${index + 1}`}
+              aria-current={index === activeIndex ? 'true' : undefined}
+            />
+          ))}
+        </div>
+        <button
+          className="project-carousel-arrow"
+          onClick={() => move(1)}
+          aria-label={tModal.nextScreenshot || 'Next screenshot'}
+        >
+          <ChevronRight size={16} />
+        </button>
       </div>
     </div>
   );
@@ -207,177 +82,168 @@ const InfiniteCarousel = ({ items, accent }) => {
 const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
   const reduceMotion = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const [showQR, setShowQR] = useState(false);
+  const [previewMedia, setPreviewMedia] = useState(null);
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) scrollAreaRef.current.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-    setShowQR(false); // Reseta ao trocar de projeto
+    scrollAreaRef.current?.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    setPreviewMedia(null);
   }, [currentIndex, reduceMotion]);
 
   useEffect(() => {
-    const orig = document.body.style.overflow;
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = orig; };
+    return () => { document.body.style.overflow = originalOverflow; };
   }, []);
+
+  useEffect(() => {
+    if (!previewMedia) return undefined;
+    const closeOnEscape = (event) => event.key === 'Escape' && setPreviewMedia(null);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [previewMedia]);
 
   if (!projects?.length) return null;
 
-  const project   = projects[currentIndex];
+  const project = projects[currentIndex];
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < projects.length - 1;
-  const goTo      = (i) => setCurrentIndex(i);
-
-  const accentOpacity = theme === 'light' ? '40' : '18';
-  const accentStyle   = { background: `linear-gradient(135deg, ${project.accent}${accentOpacity} 0%, transparent 60%)` };
+  const projectNumber = String(currentIndex + 1).padStart(2, '0');
+  const totalProjects = String(projects.length).padStart(2, '0');
 
   return (
-    <motion.div className="project-modal-overlay" data-theme={theme}
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      onClick={onClose}>
-
-      {/* Setas flutuantes nas laterais */}
-      <AnimatePresence>
-        {canGoPrev && (
-          <motion.button
-            key="previous-project"
-            className="modal-side-arrow modal-side-arrow-left"
-            onClick={(e) => { e.stopPropagation(); goTo(currentIndex - 1); }}
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -16 }}
-            transition={{ duration: 0.25 }}
-            aria-label="Previous project"
-          >
-            <ChevronLeft size={22} />
-          </motion.button>
-        )}
-        {canGoNext && (
-          <motion.button
-            key="next-project"
-            className="modal-side-arrow modal-side-arrow-right"
-            onClick={(e) => { e.stopPropagation(); goTo(currentIndex + 1); }}
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 16 }}
-            transition={{ duration: 0.25 }}
-            aria-label="Next project"
-          >
-            <ChevronRight size={22} />
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      <motion.div className="project-modal-container" onClick={(e) => e.stopPropagation()}
-        initial={{ y: 60, opacity: 0, scale: 0.97 }}
+    <motion.div
+      className="project-modal-overlay"
+      data-theme={theme}
+      style={{ '--project-accent': project.accent, '--project-accent-soft': `${project.accent}22` }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="project-modal-container"
+        onClick={(event) => event.stopPropagation()}
+        initial={{ y: 28, opacity: 0, scale: 0.98 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={{ y: 60, opacity: 0, scale: 0.97 }}
-        transition={{ duration: 0.4, ease: APPLE_EASE }}>
-
+        exit={{ y: 28, opacity: 0, scale: 0.98 }}
+        transition={{ duration: 0.35, ease: APPLE_EASE }}
+      >
         <nav className="project-modal-nav">
-          <div className="nav-center">
-            <span className="nav-project-title">{project.title}</span>
+          <div className="modal-context">
+            <span className="modal-context-label">{tModal.project || 'PROJECT'}</span>
+            <span aria-hidden="true">/</span>
+            <span>{projectNumber}</span>
           </div>
-          <div className="nav-right">
-            <button className="nav-btn-icon close-btn" onClick={onClose} aria-label="Close project"><X size={16} /></button>
+
+          <div className="modal-nav-actions">
+            <button
+              className="nav-btn-icon"
+              onClick={() => setCurrentIndex(currentIndex - 1)}
+              disabled={!canGoPrev}
+              aria-label="Previous project"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <span className="modal-counter">{projectNumber} / {totalProjects}</span>
+            <button
+              className="nav-btn-icon"
+              onClick={() => setCurrentIndex(currentIndex + 1)}
+              disabled={!canGoNext}
+              aria-label="Next project"
+            >
+              <ChevronRight size={18} />
+            </button>
+            <span className="nav-divider" aria-hidden="true" />
+            <button className="nav-btn-icon close-btn" onClick={onClose} aria-label="Close project">
+              <X size={18} />
+            </button>
           </div>
         </nav>
 
         <div className="project-modal-scroll-area" ref={scrollAreaRef}>
-  {/* SEÇÃO 1: HERO (Impacto Inicial) */}
-  <motion.div 
-    className="project-section section-hero"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, ease: APPLE_EASE }}
-  >
-    <div className="hero-bg" style={accentStyle} />
-    <div className="hero-noise" />
+          <motion.div
+            key={project.id}
+            className="project-modal-content"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, ease: APPLE_EASE }}
+          >
+              <section className="project-detail-hero" aria-labelledby="project-detail-title">
+                <div className="project-detail-copy">
+                  <div className="project-detail-kicker">
+                    <span>{project.category}</span>
+                  </div>
 
-    <div className="hero-center-content">
-      <div className="hero-icon-wrap">
-        <img src={project.logo} alt={project.title} className="hero-icon" />
-      </div>
-      <h1 className="hero-app-title">{project.title}</h1>
-      
-      {/* DESCRIÇÃO CURTA AQUI */}
-      <p className="hero-app-short-desc">{project.desc}</p>
-      
-      <div className="hero-tech-pills">
-        {project.technologies.map((tech) => (
-          <span key={tech} className="tech-pill"
-            style={{ borderColor: `${project.accent}44`, background: `${project.accent}11` }}>
-            {tech}
-          </span>
-        ))}
-      </div>
+                  <div className="project-detail-brand">
+                    <img src={project.logo} alt="" className="project-detail-logo" width="72" height="72" />
+                    <span>{tModal.details}</span>
+                  </div>
 
-      {/* DOWNLOADS */}
-      <div className="hero-download-container">
-        <div className="download-view-slot">
-          <AnimatePresence mode="wait">
-            {!showQR ? (
-              <motion.a key="badge" href={project.appStoreUrl} target="_blank" rel="noreferrer" className="appstore-badge-link"
-                initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
-                     alt="Download on the App Store" className="appstore-official-badge" width="145" height="48" loading="lazy" decoding="async" />
-              </motion.a>
-            ) : (
-              <motion.div key="qr" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>
-                <AppQRCode url={project.appStoreUrl} theme={theme} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  <h1 id="project-detail-title">{project.title}</h1>
+                  <p className="project-detail-lede">
+                    {project.desc} {project.summary || project.fullDesc}
+                  </p>
+
+                  <ul className="project-detail-technologies" aria-label="Technologies">
+                    {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+                  </ul>
+
+                  <a className="project-primary-action" href={project.appStoreUrl} target="_blank" rel="noreferrer">
+                    {tModal.showAppStore}
+                    <ArrowUpRight size={17} aria-hidden="true" />
+                  </a>
+                </div>
+
+                {project.media?.length > 0 && (
+                  <ProjectGallery
+                    key={project.id}
+                    media={project.media}
+                    title={project.title}
+                    accent={project.accent}
+                    label={tModal.screenshots}
+                    tModal={tModal}
+                    onPreview={setPreviewMedia}
+                  />
+                )}
+
+              </section>
+
+              <section className="project-detail-lower">
+                {project.team?.length > 0 && (
+                  <div className="project-team-block">
+                    <span className="section-label">{tModal.team}</span>
+                    <div className="team-column-layout">
+                      {project.team.map((member) => <TeamCard key={member.linkedin} member={member} />)}
+                    </div>
+                  </div>
+                )}
+              </section>
+          </motion.div>
         </div>
-        <button 
-  onClick={() => setShowQR(!showQR)} 
-  className="toggle-download-btn"
->
-  {showQR ? <Smartphone size={14} /> : <QrCode size={14} />}
-  {showQR ? tModal.showAppStore : tModal.showQR}
-</button>
-      </div>
-    </div>
 
-    {/* HINT DE SCROLL */}
-    <div className="modal-scroll-hint">
-      <span className="scroll-hint-label">{tModal.details}</span>
-      <svg className="scroll-hint-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 5v14M5 12l7 7 7-7" />
-      </svg>
-    </div>
-  </motion.div>
-
-  {/* SEÇÃO 2: DETALHES (Scroll Longo) */}
-  <div className="project-section section-details">
-    <div className="details-inner">
-      
-      {/* DESCRIÇÃO LONGA AQUI */}
-      <div className="description-block">
-        <span className="section-label">{tModal.about}</span>
-        <p className="full-description-text">{project.fullDesc}</p>
-      </div>
-
-      {/* SCREENSHOTS */}
-      {project.media?.length > 0 && (
-        <div className="carousel-section">
-          <span className="section-label">{tModal.screenshots}</span>
-          <InfiniteCarousel items={project.media} accent={project.accent} />
-        </div>
-      )}
-
-      {/* TEAM */}
-      {project.team?.length > 0 && (
-        <div className="team-block">
-          <span className="section-label">{tModal.team}</span>
-          <div className="team-column-layout">
-            {project.team.map((member, i) => <TeamCard key={i} member={member} />)}
-          </div>
-        </div>
-      )}
-    </div>
-  </div>
-</div>
+        {previewMedia && (
+          <motion.div
+            className="project-image-preview-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setPreviewMedia(null)}
+          >
+            <button
+              className="project-image-preview-close"
+              onClick={() => setPreviewMedia(null)}
+              aria-label={tModal.closeImage || 'Close image'}
+            >
+              <X size={20} />
+            </button>
+            <img
+              src={previewMedia.src}
+              alt={`${project.title} preview`}
+              onClick={(event) => event.stopPropagation()}
+            />
+          </motion.div>
+        )}
       </motion.div>
     </motion.div>
   );
