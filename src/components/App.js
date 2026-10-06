@@ -1,26 +1,26 @@
-import React, { useState, useRef } from 'react';
+import React, { lazy, Suspense, useState, useRef } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
 
 import Navbar from '../pages/Navbar/Navbar';
 import Hero from '../pages/Hero/Hero';
 import About from '../pages/About/About';
 import Projects from '../pages/Projects/Projects';
 import Contact from '../pages/Contact/Contact';
-import ProjectModal from '../pages/Projects/ProjectModal';
-import CVModal from '../pages/Resume/CVModal';
 
 import { useTheme, useLang } from '../hooks/useSettings';
 import { translations } from '../constants/translations';
 import { projects } from '../data';
-import fotoAbout from '../assets/foto-about.jpeg';
-import memoji from '../assets/memoji.svg';
+import fotoAbout from '../assets/foto-about.webp';
 import './App.css';
 
+const ProjectModal = lazy(() => import('../pages/Projects/ProjectModal'));
+const CVModal = lazy(() => import('../pages/Resume/CVModal'));
+
 function Home() {
+  const reduceMotion = useReducedMotion();
   const { theme, toggleTheme } = useTheme();
   const { lang, toggleLang } = useLang();
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
 
@@ -31,6 +31,8 @@ function Home() {
     ...p,
     desc:     t.projects.items[p.slug]?.desc     ?? p.desc,
     fullDesc: t.projects.items[p.slug]?.fullDesc ?? p.fullDesc,
+    summary:  t.projects.items[p.slug]?.summary,
+    category: t.projects.items[p.slug]?.category,
   }));
 
   const sectionRefs = {
@@ -41,12 +43,12 @@ function Home() {
   };
 
   const scrollTo = (id) =>
-    sectionRefs[id]?.current?.scrollIntoView({ behavior: 'smooth' });
+    sectionRefs[id]?.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 
   return (
     <>
 
-      <div className="portfolio-container">
+      <main className="portfolio-container">
         <Navbar
           t={t.nav}
           lang={lang}
@@ -61,15 +63,13 @@ function Home() {
         </section>
 
         <section ref={sectionRefs.about}>
-        <About lang={lang} t={t.about} fotoAbout={fotoAbout} memoji={memoji} />
+        <About lang={lang} t={t.about} fotoAbout={fotoAbout} />
         </section>
 
         <section ref={sectionRefs.projects}>
           <Projects
-            title={t.projects.title}
+            t={t.projects}
             projects={translatedProjects}
-            activeIndex={activeProjectIndex}
-            setActiveIndex={setActiveProjectIndex}
             onOpenProject={(i) => setSelectedProjectIndex(i)}
           />
         </section>
@@ -80,27 +80,33 @@ function Home() {
 
         <AnimatePresence>
           {selectedProjectIndex !== null && (
-            <ProjectModal
-              projects={translatedProjects}
-              initialIndex={selectedProjectIndex}
-              onClose={() => setSelectedProjectIndex(null)}
-              theme={theme}
-              tModal={t.projects.modal}
-            />
+            <Suspense key="project-modal" fallback={null}>
+              <ProjectModal
+                projects={translatedProjects}
+                initialIndex={selectedProjectIndex}
+                onClose={() => setSelectedProjectIndex(null)}
+                theme={theme}
+                tModal={t.projects.modal}
+              />
+            </Suspense>
           )}
           {isCVModalOpen && (
-            <CVModal onClose={() => setIsCVModalOpen(false)} lang={lang} />
+            <Suspense key="cv-modal" fallback={null}>
+              <CVModal onClose={() => setIsCVModalOpen(false)} lang={lang} />
+            </Suspense>
           )}
         </AnimatePresence>
-      </div>
+      </main>
     </>
   );
 }
 
 export default function App() {
   return (
-    <Router>
-      <Home />
-    </Router>
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <Home />
+      </Router>
+    </MotionConfig>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, QrCode, Smartphone } from 'lucide-react';
 import { APPLE_EASE } from '../../constants/animations';
 import './ProjectModal.css';
@@ -32,12 +32,13 @@ const TeamCard = ({ member }) => (
 
 const MediaCard = ({ item, isCenter }) => (
     <div className={`media-vertical-card ${isCenter ? 'is-center' : ''}`}>
-      <img src={item.src} alt="App screenshot" className="card-media-content" />
+      <img src={item.src} alt="App screenshot" className="card-media-content" loading={isCenter ? 'eager' : 'lazy'} decoding="async" width="200" height="380" />
       <div className="card-glass-overlay" />
     </div>
 );
 
 const InfiniteCarousel = ({ items, accent }) => {
+  const reduceMotion = useReducedMotion();
   const total  = items.length;
   const COPIES = 5;
   const MID    = 2;
@@ -65,12 +66,12 @@ const InfiniteCarousel = ({ items, accent }) => {
     const track = trackRef.current;
     if (!track) return;
     track.style.transition = animated
-      ? 'transform 0.44s cubic-bezier(0.4, 0, 0.2, 1)'
+      ? `transform ${reduceMotion ? '0.001s' : '0.44s'} cubic-bezier(0.4, 0, 0.2, 1)`
       : 'none';
     track.style.transform = `translateX(${tx}px)`;
-  }, []);
+  }, [reduceMotion]);
 
-  const absIdx = () => MID * total + offsetRef.current;
+  const absIdx = useCallback(() => MID * total + offsetRef.current, [total]);
 
   useEffect(() => {
     offsetRef.current = 0;
@@ -79,7 +80,7 @@ const InfiniteCarousel = ({ items, accent }) => {
     requestAnimationFrame(() =>
       requestAnimationFrame(() => applyTx(txForAbsolute(MID * total), false))
     );
-  }, [items, applyTx, txForAbsolute]);
+  }, [items, total, applyTx, txForAbsolute]);
 
   const go = useCallback((dir) => {
     if (busyRef.current) return;
@@ -87,7 +88,7 @@ const InfiniteCarousel = ({ items, accent }) => {
     offsetRef.current += dir;
     setDisplayIdx(((offsetRef.current % total) + total) % total);
     applyTx(txForAbsolute(absIdx()), true);
-  }, [total, applyTx, txForAbsolute]);
+  }, [total, absIdx, applyTx, txForAbsolute]);
 
   const goTo = useCallback((logIdx) => {
     if (busyRef.current) return;
@@ -100,7 +101,7 @@ const InfiniteCarousel = ({ items, accent }) => {
     offsetRef.current += diff;
     setDisplayIdx(logIdx);
     applyTx(txForAbsolute(absIdx()), true);
-  }, [total, applyTx, txForAbsolute]);
+  }, [total, absIdx, applyTx, txForAbsolute]);
 
   const onTransitionEnd = () => {
     busyRef.current = false;
@@ -194,6 +195,8 @@ const InfiniteCarousel = ({ items, accent }) => {
             className={`carousel-dot${i === displayIdx ? ' active' : ''}`}
             style={i === displayIdx ? { background: accent } : {}}
             onClick={() => goTo(i)}
+            aria-label={`Show screenshot ${i + 1}`}
+            aria-current={i === displayIdx ? 'true' : undefined}
           />
         ))}
       </div>
@@ -202,14 +205,15 @@ const InfiniteCarousel = ({ items, accent }) => {
 };
 
 const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
+  const reduceMotion = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [showQR, setShowQR] = useState(false);
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) scrollAreaRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    if (scrollAreaRef.current) scrollAreaRef.current.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     setShowQR(false); // Reseta ao trocar de projeto
-  }, [currentIndex]);
+  }, [currentIndex, reduceMotion]);
 
   useEffect(() => {
     const orig = document.body.style.overflow;
@@ -236,6 +240,7 @@ const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
       <AnimatePresence>
         {canGoPrev && (
           <motion.button
+            key="previous-project"
             className="modal-side-arrow modal-side-arrow-left"
             onClick={(e) => { e.stopPropagation(); goTo(currentIndex - 1); }}
             initial={{ opacity: 0, x: -16 }}
@@ -249,6 +254,7 @@ const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
         )}
         {canGoNext && (
           <motion.button
+            key="next-project"
             className="modal-side-arrow modal-side-arrow-right"
             onClick={(e) => { e.stopPropagation(); goTo(currentIndex + 1); }}
             initial={{ opacity: 0, x: 16 }}
@@ -273,7 +279,7 @@ const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
             <span className="nav-project-title">{project.title}</span>
           </div>
           <div className="nav-right">
-            <button className="nav-btn-icon close-btn" onClick={onClose}><X size={16} /></button>
+            <button className="nav-btn-icon close-btn" onClick={onClose} aria-label="Close project"><X size={16} /></button>
           </div>
         </nav>
 
@@ -300,7 +306,7 @@ const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
       <div className="hero-tech-pills">
         {project.technologies.map((tech) => (
           <span key={tech} className="tech-pill"
-            style={{ color: project.accent, borderColor: `${project.accent}44`, background: `${project.accent}11` }}>
+            style={{ borderColor: `${project.accent}44`, background: `${project.accent}11` }}>
             {tech}
           </span>
         ))}
@@ -314,7 +320,7 @@ const ProjectModal = ({ projects, initialIndex, onClose, theme, tModal }) => {
               <motion.a key="badge" href={project.appStoreUrl} target="_blank" rel="noreferrer" className="appstore-badge-link"
                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>
                 <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
-                     alt="Download" className="appstore-official-badge" style={{ height: '48px' }} />
+                     alt="Download on the App Store" className="appstore-official-badge" width="145" height="48" loading="lazy" decoding="async" />
               </motion.a>
             ) : (
               <motion.div key="qr" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>

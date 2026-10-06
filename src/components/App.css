@@ -65,6 +65,10 @@ img {
   width: 100%;
   box-sizing: border-box;
 }
+
+@media (min-width: 769px) {
+  .portfolio-container > section { scroll-snap-stop: always; }
+}
 /* ── Global Mobile Fixes ── */
 @media (max-width: 768px) {
   /* Allow sections to be taller than viewport on mobile for content-heavy sections */

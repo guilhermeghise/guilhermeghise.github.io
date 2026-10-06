@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { fadeLeft, fadeRight } from '../../constants/animations';
 import './About.css';
 
-const Highlight = ({ children }) => (
-  <span className="highlight">{children}</span>
+const Highlight = ({ children, flush = false }) => (
+  <span className={`highlight${flush ? ' highlight-flush' : ''}`}>{children}</span>
 );
 
 const CONTENT = {
@@ -13,7 +13,7 @@ const CONTENT = {
     <>
       <p>
         I'm an <Highlight>iOS developer</Highlight> and Software Engineering
-        student at <Highlight>PUCRS</Highlight>, currently part of the{' '}
+        student at <Highlight flush>PUCRS</Highlight>, currently part of the{' '}
         <Highlight>Apple Developer Academy</Highlight>.
       </p>
       <p>
@@ -27,7 +27,7 @@ const CONTENT = {
     <>
       <p>
         Sou <Highlight>desenvolvedor iOS</Highlight> e estudante de Engenharia
-        de Software na <Highlight>PUCRS</Highlight>, na{' '}
+        de Software na <Highlight flush>PUCRS</Highlight>, na{' '}
         <Highlight>Apple Developer Academy</Highlight>.
       </p>
       <p>
@@ -39,20 +39,7 @@ const CONTENT = {
   ),
 };
 
-// Auto-flip interval in milliseconds
-const FLIP_INTERVAL = 4000;
-
-const About = ({ lang, t, fotoAbout, memoji }) => {
-  const [flipped, setFlipped] = useState(false);
-
-  // Auto-flip every FLIP_INTERVAL ms
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFlipped(prev => !prev);
-    }, FLIP_INTERVAL);
-    return () => clearInterval(timer);
-  }, []);
-
+const About = ({ lang, t, fotoAbout }) => {
   return (
     <div className="about-section">
       <div className="about-grid">
@@ -62,39 +49,10 @@ const About = ({ lang, t, fotoAbout, memoji }) => {
         </motion.div>
 
         <motion.div className="about-visual" {...fadeRight}>
-          {/* Flip card */}
-          <div
-            className={`flip-card${flipped ? ' flipped' : ''}`}
-            onClick={() => setFlipped(prev => !prev)}
-            title="Click to flip"
-            role="button"
-            tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && setFlipped(prev => !prev)}
-            aria-label="Toggle between photo and Memoji"
-          >
-            <div className="flip-card-inner">
-              {/* Front: real photo */}
-              <div className="flip-card-front">
-                <div className="profile-wrapper">
-                  <img src={fotoAbout} alt="Guilherme Ghise" className="profile-image" />
-                </div>
-              </div>
-
-              {/* Back: Memoji */}
-              <div className="flip-card-back">
-                <div className="profile-wrapper memoji-wrapper">
-                  {memoji
-                    ? <img src={memoji} alt="Memoji" className="profile-image memoji-image" />
-                    : <span className="memoji-placeholder">🧑‍💻</span>
-                  }
-                </div>
-              </div>
+          <div className="profile-card">
+            <div className="profile-wrapper">
+              <img src={fotoAbout} alt="Guilherme Ghise" className="profile-image" width="800" height="800" />
             </div>
-
-            {/* Subtle hint */}
-            <span className="flip-hint">
-  {flipped ? t.flipBack : t.flipFront}
-</span>
           </div>
         </motion.div>
       </div>

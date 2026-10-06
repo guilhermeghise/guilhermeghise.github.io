@@ -1,32 +1,30 @@
 // Coffee Overflow
-import logoCoffeeOverflow from './assets/coffee-overflow/coffee-overflow-logo.jpeg';
-// import coffeeCover from './assets/coffee-overflow/coffee-cover.svg';
-import coffeePreview1 from './assets/coffee-overflow/coffee-preview1.svg';
-import coffeePreview2 from './assets/coffee-overflow/coffee-preview2.svg'
-import coffeePreview3 from './assets/coffee-overflow/coffee-preview3.svg';
-import coffeePreview4 from './assets/coffee-overflow/coffee-preview4.svg';
+import logoCoffeeOverflow from './assets/coffee-overflow/coffee-overflow-logo.webp';
+import coffeePreview1 from './assets/coffee-overflow/coffee-preview1.webp';
+import coffeePreview2 from './assets/coffee-overflow/coffee-preview2.webp';
+import coffeePreview3 from './assets/coffee-overflow/coffee-preview3.webp';
+import coffeePreview4 from './assets/coffee-overflow/coffee-preview4.webp';
 
 // Food Swap
-import logoFoodSwap from './assets/food-swap/food-swap-logo.png'
-import foodSwapPreview1 from './assets/food-swap/foodswap1.svg';
-import foodSwapPreview2 from './assets/food-swap/foodswap2.svg';
-import foodSwapPreview3 from './assets/food-swap/foodswap3.svg';
-import foodSwapPreview4 from './assets/food-swap/foodswap4.svg';
+import logoFoodSwap from './assets/food-swap/food-swap-logo.webp';
+import foodSwapPreview1 from './assets/food-swap/foodswap1.webp';
+import foodSwapPreview2 from './assets/food-swap/foodswap2.webp';
+import foodSwapPreview3 from './assets/food-swap/foodswap3.webp';
+import foodSwapPreview4 from './assets/food-swap/foodswap4.webp';
 
 // Zoomies
-import logoZoomies from './assets/zoomies/zoomies-logo.png'
-import ZoomiesPreview1 from './assets/zoomies/zoomies-preview1.svg';
-import ZoomiesPreview2 from './assets/zoomies/zoomies-preview2.svg';
-import ZoomiesPreview3 from './assets/zoomies/zoomies-preview3.svg';
-import ZoomiesPreview4 from './assets/zoomies/zoomies-preview4.svg';
+import logoZoomies from './assets/zoomies/zoomies-logo.webp';
+import ZoomiesPreview1 from './assets/zoomies/zoomies-preview1.webp';
+import ZoomiesPreview2 from './assets/zoomies/zoomies-preview2.webp';
+import ZoomiesPreview3 from './assets/zoomies/zoomies-preview3.webp';
+import ZoomiesPreview4 from './assets/zoomies/zoomies-preview4.webp';
 
 // Glyptis
-import logoGlyptis from './assets/glyptis/glyptis-logo.png'
-import glyptisCover from './assets/glyptis/glyptis-cover.svg'
-import GlyptisPreview1 from './assets/glyptis/glyptis-preview1.svg';
-import GlyptisPreview2 from './assets/glyptis/glyptis-preview2.svg';
-import GlyptisPreview3 from './assets/glyptis/glyptis-preview3.svg';
-import GlyptisPreview4 from './assets/glyptis/glyptis-preview4.svg';
+import logoGlyptis from './assets/glyptis/glyptis-logo.webp';
+import GlyptisPreview1 from './assets/glyptis/glyptis-preview1.webp';
+import GlyptisPreview2 from './assets/glyptis/glyptis-preview2.webp';
+import GlyptisPreview3 from './assets/glyptis/glyptis-preview3.webp';
+import GlyptisPreview4 from './assets/glyptis/glyptis-preview4.webp';
 
 
 
@@ -35,7 +33,6 @@ export const projects = [
     id: 1, 
     slug: "coffee-overflow",
     title: "Coffee Overflow", 
-    mockImage: coffeePreview1, 
     logo: logoCoffeeOverflow, 
     appStoreUrl: "https://apps.apple.com/br/app/coffee-overflow-neon-rhythm/id6760731874",
     desc: "One barista. One tray. Zero tolerance for spills.",
@@ -60,7 +57,6 @@ export const projects = [
     id: 2, 
     slug: "food-swap",
     title: "Food Swap", 
-    mockImage: foodSwapPreview2, 
     logo: logoFoodSwap, 
     appStoreUrl: "https://apps.apple.com/br/app/food-swap/id6747597054",
     desc: "Swipe, choose, eat!",
@@ -85,7 +81,6 @@ export const projects = [
     id: 3, 
     slug: "zoomies",
     title: "Zoomies", 
-    mockImage: ZoomiesPreview1,
     logo: logoZoomies, 
     appStoreUrl: "https://apps.apple.com/br/app/zoomies/id6753123082",
     desc: "Gamification of your journey",
@@ -110,7 +105,6 @@ export const projects = [
     id: 4, 
     slug: "glyptis",
     title: "Glyptis", 
-    mockImage: glyptisCover,
     logo: logoGlyptis, 
     appStoreUrl: "https://apps.apple.com/br/app/glyptis-realidade-esculpida/id6755839447",
     desc: "Sculpted Reality",

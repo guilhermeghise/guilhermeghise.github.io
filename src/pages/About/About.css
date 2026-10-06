@@ -26,7 +26,7 @@
 .about-text-block p {
   font-size: clamp(1rem, 2vw, 1.15rem);
   line-height: 1.9;
-  text-align: justify;
+  text-align: left;
   margin-bottom: 20px;
 }
 
@@ -35,6 +35,10 @@
   background: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
   padding: 0 4px;
+}
+
+.highlight-flush {
+  padding-left: 0;
 }
 
 .about-cta {
@@ -52,44 +56,10 @@
   pointer-events: none;
 }
 
-/* ══════════════════════════════════════
-   FLIP CARD
-══════════════════════════════════════ */
-
-.flip-card {
+.profile-card {
   position: relative;
   width: 320px;
   height: 320px;
-  cursor: pointer;
-  /* 3D perspective for the flip */
-  perspective: 900px;
-  outline: none;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-/* Trigger flip */
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 50%;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
 }
 
 /* Profile circle */
@@ -102,7 +72,7 @@
   transition: box-shadow 0.3s ease;
 }
 
-.flip-card:hover .profile-wrapper {
+.profile-card:hover .profile-wrapper {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
 }
 
@@ -114,52 +84,13 @@
   user-select: none;
 }
 
-/* Memoji back face — lighter bg to show the transparent PNG nicely */
-.memoji-wrapper {
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.memoji-image {
-  object-fit: contain;
-  transform: scaleX(-1);
-  width: 170%;
-  height: 170%;
-  margin-top: -15%;    
-  margin-bottom: -20%;
-  margin-left: -15%;
-  margin-right: -15%;
-}
-
-/* Subtle flip hint below the card */
-.flip-hint {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--ios-secondary);
-  opacity: 0.7;
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.flip-card:hover .flip-hint {
-  opacity: 0.9;
-}
-
 /* ── Tablet ── */
 @media (max-width: 900px) {
   .about-grid {
     gap: 48px;
   }
 
-  .flip-card {
+  .profile-card {
     width: 260px;
     height: 260px;
   }
@@ -189,7 +120,7 @@
     text-align: left;
   }
 
-  .flip-card {
+  .profile-card {
     width: 180px;
     height: 180px;
   }
@@ -204,7 +135,7 @@
     padding: 90px 20px 70px;
   }
 
-  .flip-card {
+  .profile-card {
     width: 150px;
     height: 150px;
   }

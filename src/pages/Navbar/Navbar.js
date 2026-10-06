@@ -32,7 +32,7 @@ const Navbar = ({ t, lang, theme, toggleLang, toggleTheme, scrollTo }) => {
         </div>
 
         <div className="nav-controls">
-          <button onClick={toggleLang} className="nav-icon-btn" aria-label="Toggle language">
+          <button onClick={toggleLang} className="nav-icon-btn" aria-label={`${lang.toUpperCase()} - Toggle language`}>
             <Globe size={18} />
             <span>{lang.toUpperCase()}</span>
           </button>
@@ -67,7 +67,7 @@ const Navbar = ({ t, lang, theme, toggleLang, toggleTheme, scrollTo }) => {
         <div className="nav-mobile-divider" />
 
         <div className="nav-mobile-controls">
-          <button onClick={toggleLang} className="nav-icon-btn" aria-label="Toggle language">
+          <button onClick={toggleLang} className="nav-icon-btn" aria-label={`${lang.toUpperCase()} - Toggle language`}>
             <Globe size={18} />
             <span>{lang.toUpperCase()}</span>
           </button>

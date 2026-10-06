@@ -1,174 +1,217 @@
 .projects-section {
-  padding: 120px 80px;
   min-height: 100vh;
+  padding: 84px 5% 24px;
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-  position: relative;
 }
 
-.projects-scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.5;
-  animation: bounce 2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+.projects-inner {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* ── Lista de projetos ── */
-.projects-text h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 40px;
-  letter-spacing: -0.02em;
+.projects-heading { margin-bottom: 20px; }
+
+.projects-heading h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.035em;
+  margin: 0 0 8px;
 }
 
-.projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.projects-heading p {
+  margin: 0;
+  color: var(--ios-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.project-item {
-  cursor: pointer;
-  opacity: 0.4;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  border-radius: 12px;
-  padding: 4px 0;
+.projects-banners {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
-.project-item:focus-visible {
+.project-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--ios-border);
+  border-radius: 24px;
+  background: var(--ios-card);
+  background-image: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--project-accent) 22%, transparent), transparent 75%);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project-banner:hover {
+  border-color: color-mix(in srgb, var(--project-accent) 55%, var(--ios-border));
+  transform: translateY(-4px);
+}
+
+.project-banner:has(button:focus-visible) {
   outline: 2px solid var(--ios-blue);
   outline-offset: 4px;
-  border-radius: 8px;
 }
 
-.project-item.active {
-  opacity: 1;
-  transform: translateX(10px);
+.project-banner-content {
+  width: 70%;
+  padding: 20px;
+  min-height: clamp(220px, calc((100svh - 220px) / 2), 280px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.project-item h3 {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  font-weight: 600;
-  margin: 0 0 4px;
-}
-
-.project-item p {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin: 0;
-}
-
-/* ── iPhone Mockup ── */
-.projects-visual {
+.project-banner-identity {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
-.iphone-frame {
-  position: relative;
+.project-banner-logo {
+  display: none;
+  width: 56px;
+  height: 56px;
   flex-shrink: 0;
-  height: 600px;
-  aspect-ratio: 9 / 19.5;
-  background: #000;
-  border-radius: 50px;
-  padding: 12px;
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-}
-
-.iphone-notch {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 25px;
-  background: #000;
-  border-radius: 15px;
-  z-index: 2;
-}
-
-.iphone-screen {
-  width: 100%;
-  height: 100%;
-  border-radius: 40px;
-  overflow: hidden;
-  background: #111;
-}
-
-.iphone-app {
-  width: 100%;
-  height: 100%;
+  border-radius: 13px;
   object-fit: cover;
 }
 
-/* ── Tablet ── */
-@media (max-width: 1024px) {
-  .projects-section {
-    padding: 100px 48px;
-  }
-
-  .projects-grid {
-    gap: 48px;
-  }
-
-  .iphone-frame {
-    height: 500px;
-  }
+.project-banner-category {
+  display: block;
+  color: var(--ios-secondary);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
-/* ── Mobile: stacked layout ── */
+.project-banner h3 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.project-banner-tagline {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.project-banner-summary {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ios-secondary);
+}
+
+.project-banner-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: auto 0 12px;
+  list-style: none;
+}
+
+.project-banner-technologies li {
+  padding: 5px 9px;
+  border: 1px solid var(--ios-border);
+  border-radius: 6px;
+  font-size: 0.65rem;
+  color: var(--ios-text);
+}
+
+.project-banner-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ios-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.project-banner-action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.project-banner-action:focus-visible { outline: none; }
+
+.project-banner-action svg { transition: transform 0.25s ease; }
+
+.project-banner:hover .project-banner-action svg { transform: translate(2px, -2px); }
+
+.project-banner-art {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 auto;
+  width: 32%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.project-banner-art img {
+  width: 120px;
+  max-width: 80%;
+  object-fit: contain;
+  border-radius: 28px;
+  transform: rotate(-8deg);
+  box-shadow: -12px 12px 35px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.project-banner:hover .project-banner-art img { transform: rotate(-4deg) scale(1.04); }
+
+@media (max-width: 1000px) {
+  .project-banner-content { width: 100%; }
+  .project-banner-art { display: none; }
+  .project-banner-logo { display: block; width: 40px; height: 40px; }
+}
+
+@media (min-width: 769px) and (max-height: 760px) {
+  .projects-section { padding: 76px 5% 16px; }
+  .projects-heading { margin-bottom: 12px; }
+  .projects-heading h2 { font-size: 2rem; margin-bottom: 6px; }
+  .projects-heading p { font-size: 0.9rem; }
+  .projects-banners { gap: 12px; }
+  .project-banner-content {
+    padding: 12px 16px;
+    min-height: clamp(200px, calc((100svh - 192px) / 2), 240px);
+  }
+  .project-banner-identity { margin-bottom: 8px; }
+  .project-banner h3 { font-size: 1.125rem; }
+  .project-banner-tagline { font-size: 0.8rem; line-height: 1.4; margin-bottom: 6px; }
+  .project-banner-summary { font-size: 0.75rem; line-height: 1.4; margin-bottom: 8px; }
+  .project-banner-technologies { margin-bottom: 8px; }
+  .project-banner-technologies li { padding: 4px 8px; }
+  .project-banner-art img { width: 100px; }
+}
+
 @media (max-width: 768px) {
-  .projects-section {
-    padding: 80px 24px 100px;
-    align-items: flex-start;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  /* iPhone mockup goes first on mobile */
-  .projects-visual {
-    order: -1;
-    margin-bottom: 40px;
-  }
-
-  .iphone-frame {
-    height: 380px;
-  }
-
-  .project-item.active {
-    transform: translateX(6px);
-  }
+  .projects-section { padding: 90px 20px 60px; }
+  .projects-heading { margin-bottom: 24px; }
+  .projects-banners { grid-template-columns: 1fr; gap: 16px; }
+  .project-banner-content { width: 100%; padding: 24px; min-height: 280px; }
+  .project-banner-art { display: none; }
+  .project-banner-logo { display: block; width: 52px; height: 52px; }
 }
 
-@media (max-width: 480px) {
-  .projects-section {
-    padding: 80px 20px 80px;
-  }
-
-  .iphone-frame {
-    height: 320px;
-    border-radius: 36px;
-  }
-
-  .iphone-screen {
-    border-radius: 28px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .project-banner,
+  .project-banner-action svg,
+  .project-banner-art img { transition: none; }
+  .project-banner:hover,
+  .project-banner:hover .project-banner-action svg { transform: none; }
+  .project-banner:hover .project-banner-art img { transform: rotate(-8deg); }
 }

@@ -14,6 +14,9 @@ export function useTheme() {
 
 export function useLang() {
   const [lang, setLang] = useState('en');
+  useEffect(() => {
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+  }, [lang]);
   const toggleLang = () => setLang(l => (l === 'en' ? 'pt' : 'en'));
   return { lang, toggleLang };
 }
