@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d4c73969.css",
-    "main.js": "/static/js/main.8f4ab9d5.js",
+    "main.css": "/static/css/main.009f34ff.css",
+    "main.js": "/static/js/main.87e069ac.js",
     "static/css/281.652957d9.chunk.css": "/static/css/281.652957d9.chunk.css",
     "static/js/281.9ba314d6.chunk.js": "/static/js/281.9ba314d6.chunk.js",
     "static/css/543.79a5c14e.chunk.css": "/static/css/543.79a5c14e.chunk.css",
@@ -35,15 +35,15 @@
     "static/media/glyptis-logo.webp": "/static/media/glyptis-logo.94ac69d101e05165e7cb.webp",
     "static/media/zoomies-logo.webp": "/static/media/zoomies-logo.149ed2d52610421bd061.webp",
     "index.html": "/index.html",
-    "main.d4c73969.css.map": "/static/css/main.d4c73969.css.map",
-    "main.8f4ab9d5.js.map": "/static/js/main.8f4ab9d5.js.map",
+    "main.009f34ff.css.map": "/static/css/main.009f34ff.css.map",
+    "main.87e069ac.js.map": "/static/js/main.87e069ac.js.map",
     "281.652957d9.chunk.css.map": "/static/css/281.652957d9.chunk.css.map",
     "281.9ba314d6.chunk.js.map": "/static/js/281.9ba314d6.chunk.js.map",
     "543.79a5c14e.chunk.css.map": "/static/css/543.79a5c14e.chunk.css.map",
     "543.4a755416.chunk.js.map": "/static/js/543.4a755416.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4c73969.css",
-    "static/js/main.8f4ab9d5.js"
+    "static/css/main.009f34ff.css",
+    "static/js/main.87e069ac.js"
   ]
 }
